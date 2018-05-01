@@ -63,4 +63,4 @@ The user can choose:
 
 - If stopwords are or not included in the final prediction (uncheck this box if tired of seeing only very common english words like "the" or "a").
 
-**Please note that the first prediction takes time as the server has to read the files. The following predictions are a lot faster.**
+**Please note that the first prediction takes time as the server has to load the data. The following predictions are a lot faster.**
