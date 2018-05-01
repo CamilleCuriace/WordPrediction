@@ -4,7 +4,9 @@ library(quanteda)
 library(reshape2)
 library(dplyr)
 library(sqldf)
+library(data.table)
 
+options(datatable.fread.datatable=FALSE)
 options(digits=16)
 
 values <- reactiveValues()
@@ -29,17 +31,18 @@ shinyServer(function(input, output) {
       values$first <- FALSE
       
       # Load files
-      values$unigrams  <- read.csv("unigrams.csv", sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
-      values$bigrams   <- read.csv("bigrams.csv" , sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
-      values$trigrams  <- read.csv("trigrams.csv", sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
-      values$fourgrams <- read.csv("fourgrams.csv", sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
+      values$unigrams  <- fread("unigrams.csv", sep=";", stringsAsFactors=FALSE, encoding="Latin-1")
+      values$bigrams   <- fread("bigrams.csv" , sep=";", stringsAsFactors=FALSE, encoding="Latin-1")
+      values$trigrams  <- fread("trigrams.csv", sep=";", stringsAsFactors=FALSE, encoding="Latin-1")
+      values$fourgrams <- fread("fourgrams.csv", sep=";", stringsAsFactors=FALSE, encoding="Latin-1")
+    
       
       values$unigrams  <- numerify(1, values$unigrams)
       values$bigrams   <- numerify(2, values$bigrams)
       values$trigrams  <- numerify(3, values$trigrams)
       values$fourgrams <- numerify(4, values$fourgrams)
       
-      values$context   <- read.csv("context.csv", sep=" ", stringsAsFactors=FALSE, fileEncoding="latin1")
+      values$context   <- fread("context.csv", sep=" ", stringsAsFactors=FALSE, encoding="Latin-1")
       values$context   <- numerify(0, values$context)
       
       values$stopwords        <- data.frame(unique(readLines("stopwords.txt")), stringsAsFactors = FALSE)
