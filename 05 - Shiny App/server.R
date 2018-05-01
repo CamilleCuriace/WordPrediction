@@ -30,20 +30,16 @@ shinyServer(function(input, output) {
       
       values$first <- FALSE
       
+      load("binaryFiles")
+      
       # Load files
-      values$unigrams  <- fread("unigrams.csv", sep=";", stringsAsFactors=FALSE, encoding="Latin-1")
-      values$bigrams   <- fread("bigrams.csv" , sep=";", stringsAsFactors=FALSE, encoding="Latin-1")
-      values$trigrams  <- fread("trigrams.csv", sep=";", stringsAsFactors=FALSE, encoding="Latin-1")
-      values$fourgrams <- fread("fourgrams.csv", sep=";", stringsAsFactors=FALSE, encoding="Latin-1")
-    
+      values$unigrams  <- unigrams
+      values$bigrams   <- bigrams
+      values$trigrams  <- trigrams
+      values$fourgrams <- fourgrams
+      values$context   <- context
       
-      values$unigrams  <- numerify(1, values$unigrams)
-      values$bigrams   <- numerify(2, values$bigrams)
-      values$trigrams  <- numerify(3, values$trigrams)
-      values$fourgrams <- numerify(4, values$fourgrams)
-      
-      values$context   <- fread("context.csv", sep=" ", stringsAsFactors=FALSE, encoding="Latin-1")
-      values$context   <- numerify(0, values$context)
+      rm(list=c("unigrams", "bigrams", "trigrams", "fourgrams", "context"))
       
       values$stopwords        <- data.frame(unique(readLines("stopwords.txt")), stringsAsFactors = FALSE)
       names(values$stopwords) <- c("OUTPUT")
@@ -76,24 +72,6 @@ shinyServer(function(input, output) {
   
 })
 
-
-numerify <- function(n, df) {
-  
-  if(n>0){
-    df$PROB          <- as.numeric(gsub(",", ".",df$PROB))
-    
-  } else if (n==0){
-    df$PROBCONTEXT    <- as.numeric(df$PROBCONTEXT)
-    df$Token.x        <- as.character(df$Token.x)
-    df$Token.y        <- as.character(df$Token.y)
-    
-  } else if (n==-1) {
-    df$probs          <-  as.numeric(gsub(",", ".", df$probs))
-    
-  }
-  
-  df
-}
 
 
 predict <- function(sentence, ALPHA, WEIGHT_NGRAMS, WEIGHT_CONTEXT, STOPWORDS) {
