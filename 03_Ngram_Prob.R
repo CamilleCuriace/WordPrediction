@@ -20,7 +20,7 @@ computeCounts <- function(unseen, ngram) {
 
     # Load data set
     file <- getFileName(ngram)
-    set_n <- read.csv(file, sep=";", stringsAsFactors=FALSE)
+    set_n <- read.csv(file, sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
     set_n$COUNT <- as.numeric(set_n$COUNT)
     
     
@@ -44,7 +44,7 @@ computeCounts <- function(unseen, ngram) {
         set_n           <- set_n[ , !(names(set_n) %in% c("COUNT"))]
         
         # Load the (n-1)gram data set
-        set_n_minus_1           <- read.csv(paste("counts", getFileName(ngram-1), sep="_"), sep=";", stringsAsFactors=FALSE)
+        set_n_minus_1           <- read.csv(paste("counts", getFileName(ngram-1), sep="_"), sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
         set_n_minus_1$REALCOUNT <- as.numeric(gsub(",", ".", set_n_minus_1$REALCOUNT))
         
         if (ngram-1>1) {

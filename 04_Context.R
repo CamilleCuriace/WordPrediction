@@ -37,7 +37,7 @@ process <- function(chunk) {
   if(file.exists(fileContext)){
     
       # Read existing file
-      context <- read.csv(fileContext, sep=" ")
+      context <- read.csv(fileContext, sep=" ", fileEncoding="latin1")
       
       context$Count.x       <- as.numeric(context$Count.x)
       context$Count.y       <- as.numeric(context$Count.y)
@@ -110,7 +110,7 @@ process <- function(chunk) {
 countSort <- function(){
   
   # Read existing file
-  context    <- read.csv(fileContext, sep=" ", stringsAsFactors=FALSE)
+  context    <- read.csv(fileContext, sep=" ", stringsAsFactors=FALSE, fileEncoding="latin1")
   
   context$Count.x        <- as.numeric(context$Count.x)
   context$Count.y        <- as.numeric(context$Count.y)
@@ -146,7 +146,7 @@ options(digits=16)
 # Time the code execution
 start.time <- Sys.time()
 
-unigrams  <- read.csv("counts_ngrams_1_uni.csv", sep=";", stringsAsFactors=FALSE)
+unigrams  <- read.csv("counts_ngrams_1_uni.csv", sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
 
 coef        <- 1
 start       <- 1

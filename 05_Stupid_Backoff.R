@@ -121,10 +121,10 @@ start.time <- Sys.time()
 
 # Load files
 
-unigrams  <- read.csv("counts_ngrams_1_uni.csv", sep=";", stringsAsFactors=FALSE)
-bigrams   <- read.csv("counts_ngrams_2_bi.csv" , sep=";", stringsAsFactors=FALSE)
-trigrams  <- read.csv("counts_ngrams_3_tri.csv", sep=";", stringsAsFactors=FALSE)
-fourgrams <- read.csv("counts_ngrams_4_fou.csv", sep=";", stringsAsFactors=FALSE)
+unigrams  <- read.csv("counts_ngrams_1_uni.csv", sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
+bigrams   <- read.csv("counts_ngrams_2_bi.csv" , sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
+trigrams  <- read.csv("counts_ngrams_3_tri.csv", sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
+fourgrams <- read.csv("counts_ngrams_4_fou.csv", sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
 
 
 unigrams  <- unigrams[, names(unigrams) %in% c("NGRAM", "PROB")]
@@ -137,7 +137,7 @@ bigrams   <- numerify(2, bigrams)
 trigrams  <- numerify(3, trigrams)
 fourgrams <- numerify(4, fourgrams)
 
-context   <- read.csv("context.csv", sep=" ", stringsAsFactors=FALSE)
+context   <- read.csv("context.csv", sep=" ", stringsAsFactors=FALSE, fileEncoding="latin1")
 context   <- numerify(0, context)
 
 stopwords        <- data.frame(unique(readLines("stopwords.txt")), stringsAsFactors = FALSE)

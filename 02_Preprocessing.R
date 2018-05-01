@@ -20,7 +20,7 @@ update <- function(freq, prefix) {
   
   if(file.exists(file)){
     
-      set       <- read.csv(file, sep=";")
+      set       <- read.csv(file, sep=";", fileEncoding="latin1")
       
       set$COUNT <- as.numeric(set$COUNT)
       
@@ -226,7 +226,7 @@ processfile("en_US.twitter.txt", "twitter")
   
 # Sort files
 for(i in 1:4) {
-    set <- read.csv(getFileName(i), sep=";", stringsAsFactors=FALSE)
+    set <- read.csv(getFileName(i), sep=";", stringsAsFactors=FALSE, fileEncoding="latin1")
     set$COUNT <- as.numeric(set$COUNT)
     set <- set[order(set$NGRAM),]
     write.csv2(x=set, file = getFileName(i), quote=FALSE, row.names=FALSE)
