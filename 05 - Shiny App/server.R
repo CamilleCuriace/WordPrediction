@@ -3,7 +3,6 @@ library(shiny)
 library(quanteda)
 library(dplyr)
 
-options(datatable.fread.datatable=FALSE)
 options(digits=16)
 
 values <- reactiveValues()
