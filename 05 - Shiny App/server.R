@@ -1,10 +1,7 @@
 
 library(shiny)
 library(quanteda)
-library(reshape2)
 library(dplyr)
-library(sqldf)
-library(data.table)
 
 options(datatable.fread.datatable=FALSE)
 options(digits=16)
