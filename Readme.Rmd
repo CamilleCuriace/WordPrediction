@@ -57,9 +57,9 @@ We then mixed the two models to optimize prediction:
 The Shiny app can be found here:  https://camillecuriace.shinyapps.io/Word_Prediction/
 The user can choose:  
 
-- The **ALPHA** parameter of the Katz Back-Off Model  
+- The **ALPHA** parameter of the Back-Off Model  
 
-- The weights of the Katz model and of the context : **WEIGHT_NGRAMS** and **WEIGHT_CONTEXT**  
+- The weights of the Back-Off and of the context : **WEIGHT_NGRAMS** and **WEIGHT_CONTEXT**  
 
 - If stopwords are or not included in the final prediction (uncheck this box if tired of seeing only very common english words like "the" or "a").
 
